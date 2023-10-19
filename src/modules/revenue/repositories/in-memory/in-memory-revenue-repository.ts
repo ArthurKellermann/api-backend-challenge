@@ -6,7 +6,6 @@ export class InMemoryRevenueRepository implements RevenueRepository {
   private revenues: Revenue[] = [];
 
   async create({
-    id,
     title,
     amount,
     description,
@@ -17,7 +16,6 @@ export class InMemoryRevenueRepository implements RevenueRepository {
     const revenue = new Revenue();
 
     Object.assign(revenue, {
-      id,
       title,
       amount,
       description,

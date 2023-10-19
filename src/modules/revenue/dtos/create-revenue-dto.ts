@@ -1,5 +1,4 @@
 export interface CreateRevenueDto {
-  id: string;
   title: string;
   amount: number;
   description: string;
