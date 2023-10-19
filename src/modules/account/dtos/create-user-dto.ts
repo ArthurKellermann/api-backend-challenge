@@ -3,6 +3,4 @@ export interface CreateUserDto {
   email: string;
   password: string;
   balance: number;
-  updated_at: Date;
-  created_at: Date;
 }

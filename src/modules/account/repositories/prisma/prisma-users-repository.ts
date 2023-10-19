@@ -1,11 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 import { CreateUserDto } from '../../dtos/create-user-dto';
 import { User } from '../../entities/user';
-import { UserRepository } from '../user-repository';
+import { UsersRepository } from '../users-repository';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
-export class PrismaUsersRepository implements UserRepository {
+export class PrismaUsersRepository implements UsersRepository {
   constructor(@inject('PrismaClient') private prismaClient: PrismaClient) {}
 
   async create({
@@ -13,8 +13,6 @@ export class PrismaUsersRepository implements UserRepository {
     email,
     password,
     balance,
-    created_at,
-    updated_at,
   }: CreateUserDto): Promise<User> {
     const user = await this.prismaClient.user.create({
       data: {
@@ -22,8 +20,8 @@ export class PrismaUsersRepository implements UserRepository {
         email,
         password,
         balance,
-        created_at,
-        updated_at,
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     });
 
@@ -38,7 +36,7 @@ export class PrismaUsersRepository implements UserRepository {
     });
 
     if (!user) {
-      throw new Error('User does not exists');
+      return null;
     }
 
     return user;

@@ -1,5 +1,6 @@
 import express from 'express';
 import { resolve } from 'path';
+import { router } from './routes';
 
 class App {
   public app: express.Application;
@@ -16,7 +17,9 @@ class App {
     this.app.use(express.static(resolve(__dirname, 'uploads')));
   }
 
-  private routes() {}
+  private routes() {
+    this.app.use(router);
+  }
 }
 
 export default new App().app;
