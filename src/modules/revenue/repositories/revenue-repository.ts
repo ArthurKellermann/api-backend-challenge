@@ -3,4 +3,6 @@ import { Revenue } from '../entities/revenue';
 
 export interface RevenueRepository {
   create(data: CreateRevenueDto): Promise<Revenue>;
+  deleteById(id: string): Promise<void>;
+  list(): Promise<Revenue[]>;
 }

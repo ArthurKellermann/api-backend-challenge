@@ -26,4 +26,14 @@ export class InMemoryRevenueRepository implements RevenueRepository {
 
     return revenue;
   }
+
+  async deleteById(id: string): Promise<void> {
+    const revenueIndex = this.revenues.findIndex(
+      (revenue) => revenue.id === id,
+    );
+
+    this.revenues.splice(revenueIndex, 1);
+
+    return;
+  }
 }

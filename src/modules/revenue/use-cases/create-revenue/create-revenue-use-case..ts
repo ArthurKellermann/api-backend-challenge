@@ -12,9 +12,9 @@ interface CreateRevenueRequest {
 export class CreateRevenueUseCase {
   constructor(
     @inject('PrismaRevenueRepository')
-    private revenueRepository: RevenueRepository,
+    private readonly revenueRepository: RevenueRepository,
     @inject('PrismaUsersRepository')
-    private usersRepository: UsersRepository,
+    private readonly usersRepository: UsersRepository,
   ) {}
 
   async execute({ amount, description, title, user_id }: CreateRevenueRequest) {
