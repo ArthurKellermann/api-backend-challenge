@@ -9,8 +9,7 @@ interface GetUserBalanceRequest {
 
 interface GetUserBalanceResponse {
   user: User;
-  revenue: number;
-  balanceUpdated: number;
+  balance: number;
 }
 
 @injectable()
@@ -30,13 +29,7 @@ export class GetUserBalanceUseCase {
     if (!user) {
       throw new Error('User does not exists');
     }
-    const revenue = await this.revenueRepository.getTotalRevenueAmount();
 
-    const balanceUpdated = await this.usersRepository.updateBalance({
-      data: { expense, revenue },
-      id,
-    });
-
-    return { user, revenue, balanceUpdated };
+    return { user, balance: user.balance };
   }
 }

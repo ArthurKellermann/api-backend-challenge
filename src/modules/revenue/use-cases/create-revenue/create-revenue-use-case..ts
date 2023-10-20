@@ -28,6 +28,13 @@ export class CreateRevenueUseCase {
 
     const user = await this.usersRepository.findById(user_id);
 
-    return { revenue, user };
+    user.balance += revenue.amount;
+
+    const balance = await this.usersRepository.updateBalance({
+      balance: user.balance,
+      id: user.id,
+    });
+
+    return { revenue, user, balance };
   }
 }

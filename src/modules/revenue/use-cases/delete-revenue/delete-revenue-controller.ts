@@ -5,11 +5,18 @@ import { DeleteRevenueUseCase } from './delete-revenue-use-case';
 export class DeleteRevenueController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
+    const { user_id } = req.body;
 
     const deleteRevenueUseCase = container.resolve(DeleteRevenueUseCase);
 
-    await deleteRevenueUseCase.execute(id);
+    const balance = await deleteRevenueUseCase.execute({
+      revenue_id: id,
+      user_id,
+    });
 
-    return res.status(200).send();
+    return res.status(200).json({
+      message: 'Revenue successfully deleted',
+      current_balance: balance,
+    });
   }
 }

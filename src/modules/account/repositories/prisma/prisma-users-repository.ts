@@ -57,12 +57,7 @@ export class PrismaUsersRepository implements UsersRepository {
     return user;
   }
 
-  async updateBalance({
-    data: { expense, revenue },
-    id,
-  }: UpdateUserBalanceDto): Promise<number> {
-    const balance = revenue - expense;
-
+  async updateBalance({ balance, id }: UpdateUserBalanceDto): Promise<number> {
     const user = await this.prismaClient.user.update({
       data: {
         balance,
