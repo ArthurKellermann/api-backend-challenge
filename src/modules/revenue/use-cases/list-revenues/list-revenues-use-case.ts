@@ -1,6 +1,7 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { RevenueRepository } from '../../repositories/revenue-repository';
 
+@injectable()
 export class ListRevenuesUseCase {
   constructor(
     @inject('PrismaRevenueRepository')

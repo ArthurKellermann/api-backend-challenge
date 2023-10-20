@@ -3,6 +3,7 @@ import { CreateUserDto } from '../../dtos/create-user-dto';
 import { User } from '../../entities/user';
 import { UsersRepository } from '../users-repository';
 import { inject, injectable } from 'tsyringe';
+import { UpdateUserBalanceDto } from '../../dtos/update-user-balance-dto';
 
 @injectable()
 export class PrismaUsersRepository implements UsersRepository {
@@ -54,5 +55,23 @@ export class PrismaUsersRepository implements UsersRepository {
     }
 
     return user;
+  }
+
+  async updateBalance({
+    data: { expense, revenue },
+    id,
+  }: UpdateUserBalanceDto): Promise<number> {
+    const balance = revenue - expense;
+
+    const user = await this.prismaClient.user.update({
+      data: {
+        balance,
+      },
+      where: {
+        id,
+      },
+    });
+
+    return user.balance;
   }
 }

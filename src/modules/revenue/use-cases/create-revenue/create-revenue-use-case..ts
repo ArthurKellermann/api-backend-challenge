@@ -1,4 +1,4 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { RevenueRepository } from '../../repositories/revenue-repository';
 import { UsersRepository } from '../../../account/repositories/users-repository';
 
@@ -9,6 +9,7 @@ interface CreateRevenueRequest {
   user_id: string;
 }
 
+@injectable()
 export class CreateRevenueUseCase {
   constructor(
     @inject('PrismaRevenueRepository')

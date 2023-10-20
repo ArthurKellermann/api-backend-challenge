@@ -13,5 +13,8 @@ export class User {
     if (!this.id) {
       this.id = randomUUID();
     }
+    if (!this.balance) {
+      this.balance = 0;
+    }
   }
 }
