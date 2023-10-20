@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { UsersRepository } from '../../repositories/users-repository';
 

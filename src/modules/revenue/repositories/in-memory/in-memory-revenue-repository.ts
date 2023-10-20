@@ -10,8 +10,6 @@ export class InMemoryRevenueRepository implements RevenueRepository {
     amount,
     description,
     user_id,
-    created_at,
-    updated_at,
   }: CreateRevenueDto): Promise<Revenue> {
     const revenue = new Revenue();
 
@@ -20,9 +18,11 @@ export class InMemoryRevenueRepository implements RevenueRepository {
       amount,
       description,
       user_id,
-      created_at,
-      updated_at,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
+
+    this.revenues.push(revenue);
 
     return revenue;
   }

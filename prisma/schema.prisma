@@ -11,11 +11,23 @@ datasource db {
 }
 
 model User {
-  id         String   @default(uuid())
+  id         String    @id @default(uuid())
   name       String
-  email      String   @unique
+  email      String    @unique
   password   String
   balance    Float
-  updated_at DateTime @default(now())
-  created_at DateTime @default(now())
+  updated_at DateTime  @default(now())
+  created_at DateTime  @default(now())
+  Revenue    Revenue[]
+}
+
+model Revenue {
+  id          String   @id @default(uuid())
+  title       String
+  amount      Float
+  description String
+  user_id     String?
+  user        User?    @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: SetNull)
+  updated_at  DateTime @default(now())
+  created_at  DateTime @default(now())
 }
