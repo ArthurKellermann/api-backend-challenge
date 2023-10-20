@@ -6,8 +6,8 @@ export class Revenue {
   amount: number;
   description: string;
   user_id: string;
-  updated_at: string;
-  created_at: string;
+  updated_at: Date;
+  created_at: Date;
 
   constructor() {
     if (!this.id) {

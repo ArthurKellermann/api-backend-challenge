@@ -1,6 +1,10 @@
+import 'reflect-metadata';
 import express from 'express';
 import { resolve } from 'path';
 import { router } from './routes';
+import { config } from 'dotenv';
+
+config();
 
 class App {
   public app: express.Application;
