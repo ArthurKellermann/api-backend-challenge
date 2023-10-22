@@ -23,6 +23,10 @@ export class DeleteRevenueUseCase {
     const user = await this.usersRepository.findById(user_id);
     const revenue = await this.revenueRepository.findById(revenue_id);
 
+    if (!revenue) {
+      throw new Error('Revenue does not exists');
+    }
+
     user.balance -= revenue.amount;
 
     await this.usersRepository.updateBalance({

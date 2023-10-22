@@ -61,6 +61,7 @@ export class PrismaUsersRepository implements UsersRepository {
     const user = await this.prismaClient.user.update({
       data: {
         balance,
+        updated_at: new Date(),
       },
       where: {
         id,

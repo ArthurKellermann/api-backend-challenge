@@ -7,11 +7,6 @@ interface GetUserBalanceRequest {
   id: string;
 }
 
-interface GetUserBalanceResponse {
-  user: User;
-  balance: number;
-}
-
 @injectable()
 export class GetUserBalanceUseCase {
   constructor(
@@ -21,15 +16,13 @@ export class GetUserBalanceUseCase {
     private readonly revenueRepository: RevenueRepository,
   ) {}
 
-  async execute({
-    id,
-  }: GetUserBalanceRequest): Promise<GetUserBalanceResponse> {
+  async execute({ id }: GetUserBalanceRequest): Promise<User> {
     const user = await this.usersRepository.findById(id);
 
     if (!user) {
       throw new Error('User does not exists');
     }
 
-    return { user, balance: user.balance };
+    return user;
   }
 }

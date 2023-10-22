@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import 'dotenv/config';
 import '../../container';
+import '../../container/providers/index';
 
 import express from 'express';
 import { resolve } from 'path';

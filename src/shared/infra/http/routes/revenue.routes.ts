@@ -11,9 +11,9 @@ const deleteRevenueController = new DeleteRevenueController();
 const listRevenuesController = new ListRevenuesController();
 const updateRevenueController = new UpdateRevenueController();
 
-revenueRoutes.post('/create', createRevenueController.handle);
-revenueRoutes.delete('/delete/:id', deleteRevenueController.handle);
+revenueRoutes.post('/', createRevenueController.handle);
+revenueRoutes.delete('/:id', deleteRevenueController.handle);
 revenueRoutes.get('/', listRevenuesController.handle);
-revenueRoutes.put('/update', updateRevenueController.handle);
+revenueRoutes.put('/', updateRevenueController.handle);
 
 export { revenueRoutes };
