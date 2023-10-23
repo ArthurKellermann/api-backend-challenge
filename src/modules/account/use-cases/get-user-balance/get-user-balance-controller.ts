@@ -5,7 +5,7 @@ import { UserMapper } from '../../mappers/user-mapper';
 
 export class GetUserBalanceController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
+    const { id } = req.user;
     const getUserBalanceUseCase = container.resolve(GetUserBalanceUseCase);
 
     const user = await getUserBalanceUseCase.execute({ id });

@@ -5,8 +5,8 @@ import { RevenueMapper } from '../../mappers/revenue-mapper';
 
 export class CreateRevenueController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { amount, description, title, user_id } = req.body;
-    //const { id: user_id } = req.user;
+    const { amount, description, title } = req.body;
+    const { id: user_id } = req.user;
 
     const createRevenueUseCase = container.resolve(CreateRevenueUseCase);
 

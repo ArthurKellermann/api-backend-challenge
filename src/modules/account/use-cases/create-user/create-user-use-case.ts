@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { UsersRepository } from '../../repositories/users-repository';
 import { User } from '../../entities/user';
+import { hash } from 'bcryptjs';
 
 interface CreateUserRequest {
   name: string;
@@ -28,11 +29,13 @@ export class CreateUserUseCase {
       throw new Error('User already exists');
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = await this.usersRepository.create({
       balance,
       email,
       name,
-      password,
+      password: passwordHash,
     });
 
     return user;

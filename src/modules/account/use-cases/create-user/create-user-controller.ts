@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateUserUseCase } from './create-user-use-case';
+import { UserMapper } from '../../mappers/user-mapper';
 
 export class CreateUserController {
   async handle(req: Request, res: Response): Promise<Response> {
@@ -14,6 +15,6 @@ export class CreateUserController {
       balance,
     });
 
-    return res.status(201).json(user);
+    return res.status(201).json(UserMapper.toDomain(user));
   }
 }

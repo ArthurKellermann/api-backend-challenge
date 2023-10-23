@@ -8,6 +8,7 @@ export class UserMapper {
         email: user.email,
         balance: user.balance,
         update_at: user.updated_at,
+        created_at: user.created_at,
       },
     };
   }

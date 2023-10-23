@@ -6,7 +6,7 @@ export interface RevenueRepository {
   create(data: CreateRevenueDto): Promise<Revenue>;
   deleteById(id: string): Promise<void>;
   list(): Promise<Revenue[]>;
-  udpateById(data: UpdateRevenueDto): Promise<Revenue>;
+  updateById(data: UpdateRevenueDto): Promise<Revenue>;
   findById(id: string): Promise<Revenue>;
   getTotalRevenueAmount(): Promise<number>;
 }

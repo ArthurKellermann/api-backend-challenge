@@ -35,7 +35,7 @@ export class PrismaRevenueRepository implements RevenueRepository {
     return revenues;
   }
 
-  async udpateById({
+  async updateById({
     id,
     amount,
     description,
