@@ -12,8 +12,8 @@ export class ListRevenuesUseCase {
     private readonly dateProvider: DateProvider,
   ) {}
 
-  async execute(): Promise<Revenue[]> {
-    const revenues = await this.revenueRepository.list();
+  async execute(user_id: string): Promise<Revenue[]> {
+    const revenues = await this.revenueRepository.list(user_id);
 
     return revenues.sort((a, b) => {
       return this.dateProvider.compareDate(a.created_at, b.created_at);

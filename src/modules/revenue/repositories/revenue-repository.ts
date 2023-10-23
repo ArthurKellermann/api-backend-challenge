@@ -5,8 +5,8 @@ import { Revenue } from '../entities/revenue';
 export interface RevenueRepository {
   create(data: CreateRevenueDto): Promise<Revenue>;
   deleteById(id: string): Promise<void>;
-  list(): Promise<Revenue[]>;
+  list(user_id): Promise<Revenue[]>;
   updateById(data: UpdateRevenueDto): Promise<Revenue>;
   findById(id: string): Promise<Revenue>;
-  getTotalRevenueAmount(): Promise<number>;
+  getTotalRevenueAmount(user_id: string): Promise<number>;
 }

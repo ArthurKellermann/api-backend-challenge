@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import { IsNotEmpty, IsNumber } from 'class-validator';
 
-export class Revenue {
+export class Expense {
   id: string;
 
   @IsNotEmpty()

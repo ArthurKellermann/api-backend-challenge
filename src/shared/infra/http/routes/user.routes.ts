@@ -12,7 +12,7 @@ const authenticateUserController = new AuthenticateUserController();
 
 userRoutes.post('/register', createUserController.handle);
 userRoutes.get(
-  '/balance/:id',
+  '/balance',
   ensureAuthenticated,
   getUserBalanceController.handle,
 );

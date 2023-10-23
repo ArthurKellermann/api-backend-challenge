@@ -29,8 +29,12 @@ export class PrismaRevenueRepository implements RevenueRepository {
     });
   }
 
-  async list(): Promise<Revenue[]> {
-    const revenues = await this.prismaClient.revenue.findMany();
+  async list(user_id: string): Promise<Revenue[]> {
+    const revenues = await this.prismaClient.revenue.findMany({
+      where: {
+        user_id: user_id,
+      },
+    });
 
     return revenues;
   }
@@ -44,6 +48,7 @@ export class PrismaRevenueRepository implements RevenueRepository {
       data: {
         amount,
         description,
+        updated_at: new Date(),
       },
       where: {
         id,
@@ -63,8 +68,8 @@ export class PrismaRevenueRepository implements RevenueRepository {
     return revenue;
   }
 
-  async getTotalRevenueAmount(): Promise<number> {
-    const revenues = await this.list();
+  async getTotalRevenueAmount(user_id: string): Promise<number> {
+    const revenues = await this.list(user_id);
     let amount: number = 0;
 
     revenues.forEach((revenue) => {

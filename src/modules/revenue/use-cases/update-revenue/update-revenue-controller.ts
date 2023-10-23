@@ -9,7 +9,7 @@ export class UpdateRevenueController {
 
     const updateRevenueUseCase = container.resolve(UpdateRevenueUseCase);
 
-    const revenue = updateRevenueUseCase.execute({
+    const revenue = await updateRevenueUseCase.execute({
       id: revenueId,
       amount,
       description,

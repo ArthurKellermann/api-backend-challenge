@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import { auth } from '../../../../config/auth';
+import { AppError } from '../../errors/app-error';
 
 interface Payload {
   sub: string;
@@ -13,7 +14,7 @@ export async function ensureAuthenticated(
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    throw new Error('Token missing');
+    throw new AppError('Token missing');
   }
 
   const [, token] = authHeader.split(' ');
@@ -27,6 +28,6 @@ export async function ensureAuthenticated(
 
     next();
   } catch {
-    throw new Error('Invalid token');
+    throw new AppError('Invalid token');
   }
 }

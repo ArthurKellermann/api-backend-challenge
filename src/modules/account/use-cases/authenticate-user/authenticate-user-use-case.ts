@@ -3,6 +3,7 @@ import { UsersRepository } from '../../repositories/users-repository';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { auth } from '../../../../config/auth';
+import { AppError } from '../../../../shared/infra/errors/app-error';
 
 interface AuthenticateUserRequest {
   email: string;
@@ -20,13 +21,13 @@ export class AuthenticateUserUseCase {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Email or password incorrect');
+      throw new AppError('Email or password incorrect');
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new Error('Email or password incorrect');
+      throw new AppError('Email or password incorrect');
     }
 
     const token = sign({}, auth.secret_token, {

@@ -5,6 +5,8 @@ import { UsersRepository } from '../../modules/account/repositories/users-reposi
 import { PrismaUsersRepository } from '../../modules/account/repositories/prisma/prisma-users-repository';
 import { RevenueRepository } from '../../modules/revenue/repositories/revenue-repository';
 import { PrismaRevenueRepository } from '../../modules/revenue/repositories/prisma/prisma-revenue-repository';
+import { ExpenseRepository } from '../../modules/expense/repositories/expense-repository';
+import { PrismaExpenseRepository } from '../../modules/expense/repositories/prisma/prisma-expense-repository';
 
 container.registerInstance('PrismaClient', prismaClient);
 
@@ -16,4 +18,9 @@ container.registerSingleton<UsersRepository>(
 container.registerSingleton<RevenueRepository>(
   'PrismaRevenueRepository',
   PrismaRevenueRepository,
+);
+
+container.registerSingleton<ExpenseRepository>(
+  'PrismaExpenseRepository',
+  PrismaExpenseRepository,
 );

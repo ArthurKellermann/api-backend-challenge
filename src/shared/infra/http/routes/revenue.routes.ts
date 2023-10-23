@@ -19,6 +19,6 @@ revenueRoutes.delete(
   deleteRevenueController.handle,
 );
 revenueRoutes.get('/', ensureAuthenticated, listRevenuesController.handle);
-revenueRoutes.put('/', ensureAuthenticated, updateRevenueController.handle);
+revenueRoutes.put('/:id', ensureAuthenticated, updateRevenueController.handle);
 
 export { revenueRoutes };

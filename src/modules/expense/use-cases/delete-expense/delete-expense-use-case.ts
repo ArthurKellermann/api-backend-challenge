@@ -1,41 +1,41 @@
 import { inject, injectable } from 'tsyringe';
-import { RevenueRepository } from '../../repositories/revenue-repository';
+import { ExpenseRepository } from '../../repositories/expense-repository';
 import { UsersRepository } from '../../../account/repositories/users-repository';
 import { AppError } from '../../../../shared/infra/errors/app-error';
 
-interface DeleteRevenueRequest {
-  revenue_id: string;
+interface DeleteExpenseRequest {
+  expense_id: string;
   user_id: string;
 }
 
 @injectable()
-export class DeleteRevenueUseCase {
+export class DeleteExpenseUseCase {
   constructor(
-    @inject('PrismaRevenueRepository')
-    private readonly revenueRepository: RevenueRepository,
+    @inject('PrismaExpenseRepository')
+    private readonly expenseRepository: ExpenseRepository,
     @inject('PrismaUsersRepository')
     private readonly usersRepository: UsersRepository,
   ) {}
 
   async execute({
-    revenue_id,
+    expense_id,
     user_id,
-  }: DeleteRevenueRequest): Promise<number> {
+  }: DeleteExpenseRequest): Promise<number> {
     const user = await this.usersRepository.findById(user_id);
-    const revenue = await this.revenueRepository.findById(revenue_id);
+    const expense = await this.expenseRepository.findById(expense_id);
 
-    if (!revenue) {
-      throw new AppError('Revenue does not exists');
+    if (!expense) {
+      throw new AppError('Expense does not exists');
     }
 
-    user.balance -= revenue.amount;
+    user.balance += expense.amount;
 
     await this.usersRepository.updateBalance({
       balance: user.balance,
       id: user.id,
     });
 
-    await this.revenueRepository.deleteById(revenue_id);
+    await this.expenseRepository.deleteById(expense_id);
 
     return user.balance;
   }
